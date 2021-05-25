@@ -29,9 +29,17 @@ Matrix::Matrix(int rows, int cols)
     }
 }
 
+Matrix::Matrix(const std::vector<std::vector<double> > &mat)
+{
+    m_rows = mat.size();
+    m_cols = mat[0].size();
+    m_matrix = mat;
+}
+
 // -------------------------------- // 
 //            DESTRUCTOR            //
 // -------------------------------- //
+Matrix::~Matrix() {}
 
 // -------------------------------- // 
 //            OPERATORS             //
@@ -69,9 +77,12 @@ Matrix Matrix::operator*(Matrix &rhs)
     {
         for (int ii=0; ii<m_rows; ii++)
         {
-            for (int jj=0; jj<rhs.cols(); ii++)
+            for (int jj=0; jj<m_cols; ii++)
             {
-                result(ii, jj) += (*this)(ii, jj) * rhs(jj, ii);
+                for (int kk=0; kk<rhs.rows(); kk++)
+                {
+                    result(ii, jj) += (*this)(ii, kk) * rhs(kk, jj);
+                }
             }
         }
     }
@@ -102,6 +113,34 @@ std::vector<double> Matrix::operator*(std::vector<double> &rhs)
 }
 
 double& Matrix::operator()(const int &row, const int &col) { return m_matrix[row][col]; }
+double Matrix::operator()(const int &row, const int &col) const { return m_matrix[row][col]; }
+
+bool Matrix::operator==(const Matrix &rhs) const
+{
+    if (m_rows != rhs.rows() || m_cols != rhs.cols()) { return false; }
+    for (int ii=0; ii<m_rows; ii++)
+    {
+        for (int jj=0; jj<m_cols; jj++)
+        {
+            if (m_matrix[ii][jj] != rhs(ii, jj)) { return false; }
+        }
+    }
+    return true;
+}
+
+bool Matrix::operator==(const std::vector<std::vector<double> > &rhs) const
+{
+    if (m_rows != rhs.size() || m_cols != rhs[0].size()) { return false; }
+    for (int ii=0; ii<m_rows; ii++)
+    {
+        for (int jj=0; jj<m_cols; jj++)
+        {
+            if (m_matrix[ii][jj] != rhs[ii][jj]) { return false; }
+        }
+    }
+
+    return true;
+}
 
 // -------------------------------- // 
 //         PUBLIC FUNCTIONS         //
