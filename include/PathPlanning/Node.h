@@ -1,42 +1,53 @@
 
-#ifndef RRTSTAR_H
-#define RRTSTAR_H
+#ifndef NODE_H
+#define NODE_H
 
-#define MAXITER     5000
-#define MAXSTEP_M   1
-
-#include <vector>
 #include "PathPlanning/Matrix.h"
-#include "PathPlanning/Planner.h"
+#include <vector>
+#include <map>
+#include <math.h>
 
-class RRTSTAR : public Planner
+enum DIRECTIONS {
+    INCOMING=-1,
+    BIDIRECTIONAL,
+    OUTGOING
+};
+
+class Node
 {
 public:
     // -------------------------------- // 
 	//           CONSTRUCTORS           //
 	// -------------------------------- //
-    RRTSTAR() {}
+    Node(const std::vector<float> &origin);
+    Node(const std::vector<float> &origin, const Matrix &orientation);
+    Node(const Matrix &pose);
 
     // -------------------------------- // 
 	//            DESTRUCTOR            //
 	// -------------------------------- //
-    ~RRTSTAR() {}
+    ~Node();
+
+    // -------------------------------- // 
+	//            OPERATORS             //
+	// -------------------------------- //
+    bool operator==(const Node &rhs) const;
 
     // -------------------------------- // 
 	//         PUBLIC FUNCTIONS         //
 	// -------------------------------- //
-    std::vector<Matrix> get_path(const Matrix &start, const Matrix &goal) override;
+    void add_neighbor(const Node &neighbor, DIRECTIONS &direction);
+    Matrix pose() const;
 
 private:
     // -------------------------------- // 
 	//        PRIVATE FUNCTIONS         //
 	// -------------------------------- //
-    double cost() override;
 
     // -------------------------------- // 
 	//        PRIVATE VARIABLES         //
 	// -------------------------------- //
-    
+    Matrix m_pose;
 };
 
-#endif // RRTSTAR_H
+#endif // NODE_H

@@ -11,7 +11,9 @@ public:
     // -------------------------------- // 
 	//           CONSTRUCTORS           //
 	// -------------------------------- //
+    Matrix();
     Matrix(int rows, int cols);
+    Matrix(const std::vector<std::vector<double> > &mat);
     Matrix(const char *filename);
 
     // COPY CONSTRUCTOR
@@ -28,8 +30,12 @@ public:
     Matrix operator+(Matrix &rhs);
     Matrix operator-(Matrix &rhs);
     Matrix operator*(Matrix &rhs);
+    Matrix operator=(const std::vector<std::vector<double> > &rhs);
     std::vector<double> operator*(std::vector<double> &rhs);
     double& operator()(const int &row, const int &col);
+    double operator()(const int &row, const int &col) const;
+    bool operator==(const Matrix &rhs) const;
+    bool operator==(const std::vector<std::vector<double> > &rhs) const;
 
     // -------------------------------- // 
 	//         PUBLIC FUNCTIONS         //
