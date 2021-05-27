@@ -1,5 +1,5 @@
 
-#include "PathPlanning/PlannerFactory.h"
+#include "Planners/PlannerFactory.h"
 
 Planner PlannerFactory::create(PATHPLANNER &planner)
 {

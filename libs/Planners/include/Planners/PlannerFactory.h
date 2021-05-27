@@ -2,9 +2,9 @@
 #ifndef PLANNERFACTORY_H
 #define PLANNERFACTORY_H
 
-#include "PathPlanning/Planner.h"
-#include "PathPlanning/AStar.h"
-#include "PathPlanning/RRTStar.h"
+#include "Planners/Planner.h"
+#include "Planners/AStar.h"
+#include "Planners/RRTStar.h"
 
 enum PATHPLANNER {
     AStar=0,

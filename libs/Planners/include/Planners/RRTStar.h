@@ -1,23 +1,26 @@
 
-#ifndef ASTAR_H
-#define ASTAR_H
+#ifndef RRTSTAR_H
+#define RRTSTAR_H
+
+#define MAXITER     5000
+#define MAXSTEP_M   1
 
 #include <vector>
 #include "PathPlanning/Matrix.h"
-#include "PathPlanning/Planner.h"
+#include "Planners/Planner.h"
 
-class ASTAR : public Planner
+class RRTSTAR : public Planner
 {
 public:
     // -------------------------------- // 
 	//           CONSTRUCTORS           //
 	// -------------------------------- //
-    ASTAR() {}
+    RRTSTAR() {}
 
     // -------------------------------- // 
 	//            DESTRUCTOR            //
 	// -------------------------------- //
-    ~ASTAR() {}
+    ~RRTSTAR() {}
 
     // -------------------------------- // 
 	//         PUBLIC FUNCTIONS         //
@@ -36,4 +39,4 @@ private:
     
 };
 
-#endif // ASTAR_H
+#endif // RRTSTAR_H

@@ -7,7 +7,6 @@
 #include <vector>
 #include "PathPlanning/Matrix.h"
 
-
 class Planner
 {
 public:

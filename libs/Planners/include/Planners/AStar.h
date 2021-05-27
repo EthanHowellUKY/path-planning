@@ -1,42 +1,39 @@
 
-#ifndef RRTSTAR_H
-#define RRTSTAR_H
-
-#define MAXITER     5000
-#define MAXSTEP_M   1
+#ifndef ASTAR_H
+#define ASTAR_H
 
 #include <vector>
 #include "PathPlanning/Matrix.h"
-#include "PathPlanning/Planner.h"
+#include "Planners/Planner.h"
 
-class RRTSTAR : public Planner
+class ASTAR : public Planner
 {
 public:
-    // -------------------------------- // 
+	// -------------------------------- // 
 	//           CONSTRUCTORS           //
 	// -------------------------------- //
-    RRTSTAR() {}
+	ASTAR() {}
 
-    // -------------------------------- // 
+	// -------------------------------- // 
 	//            DESTRUCTOR            //
 	// -------------------------------- //
-    ~RRTSTAR() {}
+	~ASTAR() {}
 
-    // -------------------------------- // 
+	// -------------------------------- // 
 	//         PUBLIC FUNCTIONS         //
 	// -------------------------------- //
-    std::vector<Matrix> get_path(const Matrix &start, const Matrix &goal) override;
+	std::vector<Matrix> get_path(const Matrix &start, const Matrix &goal) override;
 
 private:
     // -------------------------------- // 
 	//        PRIVATE FUNCTIONS         //
 	// -------------------------------- //
-    double cost() override;
+	double cost() override;
 
-    // -------------------------------- // 
+	// -------------------------------- // 
 	//        PRIVATE VARIABLES         //
 	// -------------------------------- //
-    
+
 };
 
-#endif // RRTSTAR_H
+#endif // ASTAR_H

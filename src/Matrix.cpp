@@ -15,6 +15,42 @@ void Matrix::add_sub(Matrix &mat, Matrix &lhs, Matrix &rhs, const int &op)
     }
 }
 
+double Matrix::pnorm(const Matrix &u, const int &p)
+{
+    double tmp = 0.0;
+    for (int ii=0; ii<u.rows(); ii++)
+    {
+        for (int jj=0; jj<u.cols(); jj++)
+        {
+            tmp += pow(u(ii, jj), p);
+        }
+    }
+    return pow(tmp, 1.0/p);
+}
+
+double Matrix::pnorm(const std::vector<double> &u, const int &p)
+{
+    double tmp = 0.0;
+    for (int ii=0; ii<u.size(); ii++)
+    {
+        tmp += pow(u[ii], p);
+    }
+    return pow(tmp, 1.0/p);
+}
+
+double Matrix::pnorm(const std::vector<std::vector<double> > &u, const int &p)
+{
+    double tmp = 0.0;
+    for (int ii=0; ii<u.size(); ii++)
+    {
+        for (int jj=0; jj<u[ii].size(); jj++)
+        {
+            tmp += pow(u[ii][jj], p);
+        }
+    }
+    return pow(tmp, 1.0/p);
+}
+
 // -------------------------------- // 
 //           CONSTRUCTORS           //
 // -------------------------------- //
@@ -159,12 +195,30 @@ Matrix Matrix::transpose()
     return T_;
 }
 
-std::vector<double> solve(const Matrix &A, const std::vector<double> &b)
+void Matrix::print_solver() { m_solver->print(); }
+
+double Matrix::norm1(const Matrix &u) { return pnorm(u, 1.0); }
+double Matrix::norm1(const std::vector<double> &u) { return pnorm(u, 1.0); }
+double Matrix::norm1(const std::vector<std::vector<double> > &u) { return pnorm(u, 1.0); }
+double Matrix::norm2(const Matrix &u) { return pnorm(u, 2.0); }
+double Matrix::norm2(const std::vector<double> &u) { return pnorm(u, 2.0); }
+double Matrix::norm2(const std::vector<std::vector<double> > &u) { return pnorm(u, 2.0); }
+Matrix Matrix::scalar_multiply(double &scalar, Matrix &mat)
 {
-    std::vector<double> x;
-    return x;
+    for (int ii=0; ii<mat.rows(); ii++)
+    {
+        for (int jj=0; jj<mat.cols(); jj++)
+        {
+            mat(ii, jj) *= scalar;
+        }
+    }
+    return mat;
 }
 
 // ------------ GETTERS ----------- //
 int Matrix::rows() const { return m_rows; }
 int Matrix::cols() const { return m_cols; }
+
+// ------------ RELATED ----------- //
+Matrix operator*(Matrix rhs, double lhs) { return Matrix::scalar_multiply(lhs, rhs); }
+Matrix operator*(double lhs, Matrix rhs) { return Matrix::scalar_multiply(lhs, rhs); }
