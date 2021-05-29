@@ -1,5 +1,5 @@
 
-project(BAVPathPlanning)
+project(PathPlanning)
 
 if (WIN32)
     set(VCPKG_DIR "C:/vcpkg/installed/x64-windows")
@@ -15,8 +15,6 @@ else(NOT MSCV)
     set(CMAKE_CXX_STANDARD 17)
 endif(MSVC)
 
-add_subdirectory(libs/Planners)
-add_subdirectory(libs/Solvers)
 find_package(GTest CONFIG REQUIRED)
 
 file(GLOB_RECURSE HEADER_FILES include/*.h)
@@ -26,16 +24,16 @@ add_library(
     ${SRC_FILES}
     ${HEADER_FILES}
     )
-add_library(bav::pathplanning ALIAS ${PROJECT_NAME})
+add_library(echo::pathplanning ALIAS ${PROJECT_NAME})
 
 target_include_directories( ${PROJECT_NAME}
     PUBLIC ${PROJECT_SOURCE_DIR}/include
 )
 
 target_link_libraries( ${PROJECT_NAME}
+    PRIVATE echo::matrixmodels
+    PRIVATE echo::graph
     PRIVATE GTest::gmock GTest::gtest GTest::gmock_main GTest::gtest_main
-    PRIVATE bav::pathplanningmodels
-    PRIVATE bav::matrixsolvermodels
 )
 
 set(BUILD_TESTING ON)

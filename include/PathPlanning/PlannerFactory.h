@@ -2,13 +2,14 @@
 #ifndef PLANNERFACTORY_H
 #define PLANNERFACTORY_H
 
-#include "Planners/Planner.h"
-#include "Planners/AStar.h"
-#include "Planners/RRTStar.h"
+#include "PathPlanning/Planner.h"
+#include "PathPlanning/AStar.h"
+#include "PathPlanning/RRTStar.h"
 
-enum PATHPLANNER {
-    AStar=0,
-    RRTStar
+enum PATHPLANNER
+{
+    ASTAR = 0,
+    RRTSTAR
 };
 
 class PlannerFactory

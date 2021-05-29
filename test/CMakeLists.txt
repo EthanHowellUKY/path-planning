@@ -16,9 +16,7 @@ macro(package_add_test TESTNAME)
         GTest::gmock
         GTest::gmock_main
         GTest::gtest_main
-        bav::pathplanning
-        bav::pathplanningmodels
-        bav::matrixsolvermodels
+        echo::pathplanning
     )
     # gtest_discover_tests replaces gtest_add_tests,
     # see https://cmake.org/cmake/help/v3.10/module/GoogleTest.html for more options to pass to it
@@ -30,4 +28,4 @@ macro(package_add_test TESTNAME)
     set_target_properties(${TESTNAME} PROPERTIES FOLDER tests)
 endmacro()
 
-package_add_test(MatrixTest matrix-test.cpp)
+package_add_test(PathPlanningTest path-test.cpp)
