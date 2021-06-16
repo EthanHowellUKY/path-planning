@@ -20,13 +20,14 @@ public:
 	// -------------------------------- //
 	//         PUBLIC FUNCTIONS         //
 	// -------------------------------- //
-	std::vector<Node> get_path(const Node &start, const Node &goal) override;
+	std::deque<Node> get_path(const Node &start, const Node &goal) override;
+	void print_path(std::deque<Node> &path) override;
 
 private:
 	// -------------------------------- //
 	//        PRIVATE FUNCTIONS         //
 	// -------------------------------- //
-	double cost() override;
+	double cost(Node &parent, Node &child) override;
 
 	// -------------------------------- //
 	//        PRIVATE VARIABLES         //

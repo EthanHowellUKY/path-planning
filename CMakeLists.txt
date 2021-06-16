@@ -36,9 +36,9 @@ target_link_libraries( ${PROJECT_NAME}
     PRIVATE GTest::gmock GTest::gtest GTest::gmock_main GTest::gtest_main
 )
 
-set(BUILD_TESTING ON)
-if(BUILD_TESTING)
-    enable_testing()
-    include(GoogleTest)
-    add_subdirectory(test)
-endif()
+# set(BUILD_TESTING ON)
+# if(BUILD_TESTING)
+#     enable_testing()
+#     include(GoogleTest)
+#     add_subdirectory(test)
+# endif()
