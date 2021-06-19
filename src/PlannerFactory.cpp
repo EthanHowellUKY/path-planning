@@ -1,18 +1,18 @@
 
 #include "PathPlanning/PlannerFactory.h"
 
-Planner PlannerFactory::create(PATHPLANNER &planner)
+Planner* PlannerFactory::create(const PATHPLANNER &planner)
 {
     switch (planner)
     {
     case ASTAR:
-        return AStar();
+        return new AStar();
         break;
     case RRTSTAR:
-        return RRTStar();
+        return new RRTStar();
         break;
     default:
-        return AStar();
+        return new AStar();
         break;
     }
 }

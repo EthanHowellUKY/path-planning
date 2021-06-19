@@ -20,16 +20,17 @@ public:
 	// -------------------------------- //
 	//         PUBLIC FUNCTIONS         //
 	// -------------------------------- //
-	std::deque<Node> get_path(const Node &start, const Node &goal) override;
-	void print_path(std::deque<Node> &path) override;
+	std::deque<std::shared_ptr<Node> > get_path(std::shared_ptr<Node> &start, std::shared_ptr<Node> &goal) override;
+	void print_path(std::deque<std::shared_ptr<Node> > &path) override;
 
 private:
 	// -------------------------------- //
 	//        PRIVATE FUNCTIONS         //
 	// -------------------------------- //
-	double cost(Node &parent, Node &child) override;
+	double cost(Matrix &mat) override;
+	double cost(std::shared_ptr<Node> &parent, std::shared_ptr<Node> &child) override;
 	Node get_current();
-	std::deque<Node> build_path(std::vector<Node> &visited, Node &current);
+	std::deque<std::shared_ptr<Node> > build_path(std::vector<std::shared_ptr<Node> > &visited, std::shared_ptr<Node> &current);
 
 	// -------------------------------- //
 	//        PRIVATE VARIABLES         //

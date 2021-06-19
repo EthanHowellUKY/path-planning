@@ -15,7 +15,7 @@ enum PATHPLANNER
 class PlannerFactory
 {
 public:
-    static Planner create(PATHPLANNER &planner);
+    static Planner *create(const PATHPLANNER &planner);
 };
 
 #endif // PLANNERFACTORY_H
