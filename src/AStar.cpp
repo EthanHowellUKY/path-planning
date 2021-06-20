@@ -109,11 +109,11 @@ void AStar::print_path(std::deque<Node *> &path)
     for (int ii = 0; ii<path.size(); ii++)
     {
         Node *current_node = path[ii];
-        current_node->pose().print();
+        std::cout << current_node->name();
         if (ii != path.size()-1)
         {
-            std::cout << "   |   " << '\n';
-            std::cout << "   V   " << '\n'; 
+            std::cout << " -> ";
         }
     }
+    std::cout << '\n';
 }
