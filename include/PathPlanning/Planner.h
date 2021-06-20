@@ -9,20 +9,19 @@
 #include <map>
 #include <deque>
 #include <vector>
-#include <memory>
 #include <functional>
 #include "Graph/Node.h"
 
 class Planner
 {
 public:
-    virtual std::deque<std::shared_ptr<Node> > get_path(std::shared_ptr<Node> &start, std::shared_ptr<Node> &goal) = 0;
-    virtual void print_path(std::deque<std::shared_ptr<Node> > &path) = 0;
-    std::map<int, Node> graph;
+    virtual std::deque<Node *> get_path(Node *start, Node *goal) = 0;
+    virtual void print_path(std::deque<Node *> &path) = 0;
 
 private:
     virtual double cost(Matrix &mat) = 0;
-    virtual double cost(std::shared_ptr<Node> &parent, std::shared_ptr<Node> &child) = 0;
+    virtual double cost(Node *parent, Node *child) = 0;
+    virtual std::deque<Node *> build_path(std::vector<Node *> &visited, Node *current) = 0;
 };
 
 #endif // PLANNER_H

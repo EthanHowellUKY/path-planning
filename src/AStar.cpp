@@ -2,12 +2,12 @@
 #include "PathPlanning/AStar.h"
 
 double AStar::cost(Matrix &mat) { return Matrix::norm2(mat); }
-double AStar::cost(std::shared_ptr<Node> &parent, std::shared_ptr<Node> &child) { Matrix mat = *(parent.get()) * *(child).get(); return this->cost(mat); }
+double AStar::cost(Node *parent, Node *child) { Matrix mat = parent->pose() * child->pose(); return this->cost(mat); }
 
-std::deque<std::shared_ptr<Node> > AStar::build_path(std::vector<std::shared_ptr<Node> > &visited, std::shared_ptr<Node> &current)
+std::deque<Node *> AStar::build_path(std::vector<Node *> &visited, Node *current)
 {
-    std::deque<std::shared_ptr<Node> > path{current};
-    std::vector<std::shared_ptr<Node> >::iterator itr;
+    std::deque<Node *> path{current};
+    std::vector<Node *>::iterator itr;
     while ((itr = std::find(visited.begin(), visited.end(), current)) != visited.end() && (*itr)->has_parent)
     {
         current = (*itr)->parent();
@@ -17,17 +17,15 @@ std::deque<std::shared_ptr<Node> > AStar::build_path(std::vector<std::shared_ptr
     return path;
 }
 
-std::deque<std::shared_ptr<Node> > AStar::get_path(std::shared_ptr<Node> &start, std::shared_ptr<Node> &goal)
+std::deque<Node *> AStar::get_path(Node *start, Node *goal)
 {
-    double cost = __FLT_MAX__, est_cost = __FLT_MAX__;
+    double est_cost = __FLT_MAX__;
     start->f = this->cost(start, goal);
-    std::vector<std::shared_ptr<Node> > to_explore{start}, visited, edges;
-    std::deque<std::shared_ptr<Node> > path;
-    std::vector<std::shared_ptr<Node> >::iterator itr;
-    std::shared_ptr<Node> current_node;
+    std::vector<Node *> to_explore{start}, visited;
+    std::deque<Node *> path;
+    std::vector<Node *>::iterator itr;
+    Node *current_node;
     int curr_idx, ii, xx=0;
-
-    std::map<int, Node> parents;
 
     /*
         Loop over all the nodes until
@@ -76,12 +74,12 @@ std::deque<std::shared_ptr<Node> > AStar::get_path(std::shared_ptr<Node> &start,
             */
             for (int jj=0; jj < current_node->num_edges(); jj++)
             {
-                std::shared_ptr<Edge> current_edge = current_node->get_edge(jj);
+                Edge* current_edge = current_node->get_edge(jj);
 
                 // Verify that the directed edge allows the movement.
                 if (current_edge->dir != DIRECTION::INCOMING)
                 {
-                    std::shared_ptr<Node> child = current_edge->dest;
+                    Node *child = current_edge->dest;
                     itr = std::find(visited.begin(), visited.end(), child);
                     double distance = this->cost(current_node, child);
                     est_cost = current_node->g + distance;
@@ -106,11 +104,11 @@ std::deque<std::shared_ptr<Node> > AStar::get_path(std::shared_ptr<Node> &start,
     return path;
 }
 
-void AStar::print_path(std::deque<std::shared_ptr<Node> > &path)
+void AStar::print_path(std::deque<Node *> &path)
 {
     for (int ii = 0; ii<path.size(); ii++)
     {
-        std::shared_ptr<Node> current_node = path[ii];
+        Node *current_node = path[ii];
         current_node->pose().print();
         if (ii != path.size()-1)
         {

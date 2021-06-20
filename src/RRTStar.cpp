@@ -3,16 +3,22 @@
 
 double RRTStar::cost(Matrix &mat) { return 0.0; }
 
-double RRTStar::cost(std::shared_ptr<Node> &parent, std::shared_ptr<Node> &child)
+std::deque<Node *> RRTStar::build_path(std::vector<Node *> &visited, Node *current)
+{
+    std::deque<Node *> path;
+    return path;
+}
+
+double RRTStar::cost(Node *parent, Node *child)
 {
     return 0.0;
 }
 
-std::deque<std::shared_ptr<Node> > RRTStar::get_path(std::shared_ptr<Node> &start, std::shared_ptr<Node> &goal)
+std::deque<Node *> RRTStar::get_path(Node *start, Node *goal)
 {
-    std::deque<std::shared_ptr<Node> > path;
+    std::deque<Node *> path;
 
     return path;
 }
 
-void RRTStar::print_path(std::deque<std::shared_ptr<Node> > &path) {}
+void RRTStar::print_path(std::deque<Node *> &path) {}
