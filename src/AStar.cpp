@@ -92,8 +92,8 @@ std::deque<Node *> AStar::get_path(Node *start, Node *goal)
                         child->f = child->g + this->cost(child, goal);
                         if (itr == visited.end()) { visited.push_back(child); }
                     }
+                    to_explore.push_back(child);
                 }
-                to_explore.push_back(current_edge->dest);
             }
         }
 
