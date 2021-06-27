@@ -4,6 +4,14 @@
 
 #include "PathPlanning/Planner.h"
 
+struct NodeComparator
+{
+	bool operator()(const Node *lhs, const Node *rhs) const
+	{
+		return lhs->f > rhs->f;
+	}
+};
+
 class AStar : public Planner
 {
 public:
@@ -27,7 +35,6 @@ private:
 	// -------------------------------- //
 	//        PRIVATE FUNCTIONS         //
 	// -------------------------------- //
-	double cost(Matrix &mat) override;
 	double cost(Node *parent, Node *child) override;
 	std::deque<Node *> build_path(std::vector<Node *> &visited, Node *current) override;
 

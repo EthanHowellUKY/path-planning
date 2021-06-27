@@ -1,8 +1,6 @@
 
 #include "PathPlanning/RRTStar.h"
 
-double RRTStar::cost(Matrix &mat) { return 0.0; }
-
 std::deque<Node *> RRTStar::build_path(std::vector<Node *> &visited, Node *current)
 {
     std::deque<Node *> path;

@@ -1,8 +1,7 @@
 
 #include "PathPlanning/AStar.h"
 
-double AStar::cost(Matrix &mat) { return Matrix::norm2(mat); }
-double AStar::cost(Node *parent, Node *child) { Matrix mat = parent->pose() * child->pose(); return this->cost(mat); }
+double AStar::cost(Node *parent, Node *child) { return (parent->pose() * child->pose()).norm(); }
 
 std::deque<Node *> AStar::build_path(std::vector<Node *> &visited, Node *current)
 {
@@ -21,11 +20,13 @@ std::deque<Node *> AStar::get_path(Node *start, Node *goal)
 {
     double est_cost = __FLT_MAX__;
     start->f = this->cost(start, goal);
-    std::vector<Node *> to_explore{start}, visited;
+    std::priority_queue<Node *, std::vector<Node *>, NodeComparator> to_explore;
+    to_explore.push(start);
+    std::vector<Node *> visited;
     std::deque<Node *> path;
     std::vector<Node *>::iterator itr;
     Node *current_node;
-    int curr_idx, ii, xx=0;
+    int ii, xx=0;
 
     /*
         Loop over all the nodes until
@@ -41,16 +42,7 @@ std::deque<Node *> AStar::get_path(Node *start, Node *goal)
             to this node, and the distance from the current node to the
             goal node.
         */
-        curr_idx = 0;
-        current_node = to_explore[curr_idx];
-        for (ii = 0; ii<to_explore.size(); ii++)
-        {   
-            if (to_explore[ii]->f < current_node->f)
-            {
-                curr_idx = ii;
-                current_node = to_explore[curr_idx];
-            }
-        }
+        current_node = to_explore.top();
         
         /*
             Check to see if the lowest cost node to evaluate is the goal node.
@@ -64,8 +56,7 @@ std::deque<Node *> AStar::get_path(Node *start, Node *goal)
         }
         else
         {
-            itr = std::find(to_explore.begin(), to_explore.end(), current_node);
-            to_explore.erase(itr); // Remove the current node from the exploration list.
+            to_explore.pop(); // Remove the current node from the exploration list.
             visited.push_back(current_node); // Add the current node to the vector of visited nodes.
 
             /*
@@ -92,7 +83,7 @@ std::deque<Node *> AStar::get_path(Node *start, Node *goal)
                         child->f = child->g + this->cost(child, goal);
                         if (itr == visited.end()) { visited.push_back(child); }
                     }
-                    to_explore.push_back(child);
+                    to_explore.push(child);
                 }
             }
         }

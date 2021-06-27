@@ -7,9 +7,12 @@
 #define MAXSTEP_M 1
 
 #include <map>
+#include <set>
 #include <deque>
+#include <queue>
 #include <vector>
 #include <functional>
+#include <iostream>
 #include "Graph/Node.h"
 
 class Planner
@@ -19,7 +22,6 @@ public:
     virtual void print_path(std::deque<Node *> &path) = 0;
 
 private:
-    virtual double cost(Matrix &mat) = 0;
     virtual double cost(Node *parent, Node *child) = 0;
     virtual std::deque<Node *> build_path(std::vector<Node *> &visited, Node *current) = 0;
 };
