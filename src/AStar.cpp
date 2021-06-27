@@ -36,6 +36,8 @@ std::deque<Node *> AStar::get_path(Node *start, Node *goal)
     */
     while (!to_explore.empty() && xx < MAXITER)
     {
+        xx++;
+
         /*
             Assign the "current node" as the node who has the lowest total
             "f". This cost is a summation of the costs at each node prior
@@ -82,13 +84,11 @@ std::deque<Node *> AStar::get_path(Node *start, Node *goal)
                         child->g = est_cost;
                         child->f = child->g + this->cost(child, goal);
                         if (itr == visited.end()) { visited.push_back(child); }
+                        to_explore.push(child);
                     }
-                    to_explore.push(child);
                 }
             }
         }
-
-        xx++;
     }
     std::cout << "Taking too long... Exiting: " << xx << '\n';
 
