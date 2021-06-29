@@ -1,7 +1,7 @@
 
 #include "PathPlanning/AStar.h"
 
-double AStar::cost(Node *parent, Node *child) { return (parent->pose() * child->pose()).norm(); }
+double AStar::cost(Node *parent, Node *child) { return Matrix::norm2(parent->pose() * child->pose()); }
 
 std::deque<Node *> AStar::build_path(std::vector<Node *> &visited, Node *current)
 {

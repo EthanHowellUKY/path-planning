@@ -13,6 +13,7 @@
 #include <vector>
 #include <functional>
 #include <iostream>
+
 #include "Graph/Node.h"
 
 class Planner
