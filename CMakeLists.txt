@@ -16,7 +16,6 @@ else(NOT MSCV)
 endif(MSVC)
 
 find_package(GTest CONFIG REQUIRED)
-#find_package(Eigen3 CONFIG REQUIRED)
 
 file(GLOB_RECURSE HEADER_FILES include/*.h)
 file(GLOB_RECURSE SRC_FILES src/*.cpp)
@@ -33,7 +32,6 @@ target_include_directories( ${PROJECT_NAME}
 
 target_link_libraries( ${PROJECT_NAME}
     PRIVATE echo::linearalgebra
-    PRIVATE echo::graph
     PRIVATE GTest::gmock GTest::gtest GTest::gmock_main GTest::gtest_main
 )
 
