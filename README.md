@@ -81,7 +81,6 @@ And add these lines to `src/CMakeLists.txt`
 ```cmake
 ...
 project(${CMAKE_PROJECT_NAME} CXX)
-find_package(CURL CONFIG REQUIRED)
 file(GLOB_RECURSE HEADER_FILES *.h)
 file(GLOB_RECURSE SRC_FILES *.cpp)
 ...
