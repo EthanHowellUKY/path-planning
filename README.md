@@ -1,7 +1,8 @@
 
-- [Dynamic Path Planning Module](#smtp-client-module)
+- [Dynamic Path Planning Module](#dynamic-path-planning-module)
 - [Required Packages](#required-packages)
 - [Building the Project](#building-the-project)
+- [Supported Planning Models](#supported-planning-models)
 - [Example](#example)
 
 # Dynamic Path Planning Module
@@ -50,15 +51,15 @@ This project is configured to build as a library and will produce no executable.
 |   |   |   +-- RRTStar.cpp
 |   |   +-- test/
 |   |   |   +-- CMakeLists.txt
-|   |   |   +-- path-text.cpp
+|   |   |   +-- path-test.cpp
 |   |   +-- CHANGELOG.md
 |   |   +-- CMakeLists.txt
 |   |   +-- LICENSE.md
 |   |   +-- README.md
 |   +-- LinearAlgebra/
-|   |   +--- ...
-|   |   +--- ...
-|   |   +--- ...
+|   |   +-- ...
+|   |   +-- ...
+|   |   +-- ...
 +-- src/
 |   +-- main.cpp
 |   +-- CMakeLists.txt
@@ -93,7 +94,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
 ...
 ```
 
-# Supported planning models
+# Supported Planning Models
 
 Currently, only A* is supported to generate paths on a directed graph. Future implementations are in progress to support the RRT* algorithm as well as A* search over a grid.
 
@@ -125,7 +126,7 @@ int main(int argc, char *argv[])
                  /     \
        ( x_1 ) o -- o -- o ( x_4 )
                  ( x_2 )
-    */
+	*/
 	
 	x1->add_edge(x2, DIRECTION::BIDIRECTIONAL);
 	x1->add_edge(x3, DIRECTION::BIDIRECTIONAL);
