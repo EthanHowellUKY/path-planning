@@ -27,8 +27,8 @@ public:
     //           CONSTRUCTORS           //
     // -------------------------------- //
     Node() {}
-    Node(const int &id, const std::string &name, const std::vector<float> &origin);
-    Node(const int &id, const std::string &name, const std::vector<float> &origin, const Matrix &orientation);
+    Node(const int &id, const std::string &name, const std::vector<double> &origin);
+    Node(const int &id, const std::string &name, const std::vector<double> &origin, const Matrix &orientation);
     Node(const int &id, const std::string &name, const Matrix &pose);
 
     // -------------------------------- //
@@ -49,6 +49,7 @@ public:
     // -------------------------------- //
 
     int connects_with(Node *node);
+    void reset_cost();
 
     // ------------ GETTERS ----------- //
     Edge*               get_edge(const int &idx);

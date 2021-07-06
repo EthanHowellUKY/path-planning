@@ -27,8 +27,10 @@ private:
 	// -------------------------------- //
 	//        PRIVATE FUNCTIONS         //
 	// -------------------------------- //
+	double dRand();
 	double cost(Node *parent, Node *child) override;
 	std::deque<Node *> build_path(std::vector<Node *> &visited, Node *current) override;
+	Node* get_random_node();
 
 	// -------------------------------- //
 	//        PRIVATE VARIABLES         //

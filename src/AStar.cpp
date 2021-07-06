@@ -10,6 +10,7 @@ std::deque<Node *> AStar::build_path(std::vector<Node *> &visited, Node *current
     while ((itr = std::find(visited.begin(), visited.end(), current)) != visited.end() && (*itr)->has_parent)
     {
         current = (*itr)->parent();
+        current->reset_cost();
         path.push_front(current);
     }
 
@@ -80,6 +81,7 @@ std::deque<Node *> AStar::get_path(Node *start, Node *goal)
                     // Check to see if the cost of this move is better than any previous move.
                     if (est_cost < child->g)
                     {
+                        if (child->has_parent) { child->parent()->reset_cost(); }
                         child->set_parent(current_node);
                         child->g = est_cost;
                         child->f = child->g + this->cost(child, goal);

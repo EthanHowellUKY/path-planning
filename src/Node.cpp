@@ -9,14 +9,14 @@ Edge* Node::get_edge() { return new Edge(); }
 // -------------------------------- //
 //           CONSTRUCTORS           //
 // -------------------------------- //
-Node::Node(const int &id, const std::string &name, const std::vector<float> &origin)
+Node::Node(const int &id, const std::string &name, const std::vector<double> &origin)
     : m_pose(origin.size() + 1, origin.size() + 1),
       m_name{name},
       m_id{id}
 {
     has_parent = false;
 
-    int col = origin.size() - 1;
+    int col = origin.size();
     for (int ii = 0; ii < origin.size(); ii++)
     {
         m_pose(ii, col) = origin[ii];
@@ -24,7 +24,7 @@ Node::Node(const int &id, const std::string &name, const std::vector<float> &ori
     m_pose(col, col) = 1;
 }
 
-Node::Node(const int &id, const std::string &name, const std::vector<float> &origin, const Matrix &orientation)
+Node::Node(const int &id, const std::string &name, const std::vector<double> &origin, const Matrix &orientation)
     : m_pose(origin.size() + 1, origin.size() + 1),
       m_name{name},
       m_id{id}
@@ -76,6 +76,13 @@ int Node::connects_with(Node *node)
     }
 
     return -1;
+}
+
+void Node::reset_cost()
+{
+    this->f = __FLT_MAX__;
+    this->g = __FLT_MAX__;
+    this->h = __FLT_MAX__;
 }
 
 // ------------ GETTERS ----------- //

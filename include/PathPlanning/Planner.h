@@ -13,6 +13,8 @@
 #include <vector>
 #include <functional>
 #include <iostream>
+#include <cstdlib>
+#include <time.h>
 
 #include "Graph/Node.h"
 
