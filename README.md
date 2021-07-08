@@ -112,7 +112,7 @@ The following example shows how the module can be used to build a simple graph a
 
 int main(int argc, char *argv[])
 {
-    Planner *path_planner = PlannerFactory::create(PATHPLANNER::ASTAR);
+	Planner *path_planner = PlannerFactory::create(PATHPLANNER::ASTAR);
 
 	Node *x1 = new Node(1, "X1", std::vector<float>{0, 0, 0});
 	Node *x2 = new Node(2, "X2", std::vector<float>{1, 0, 0});
@@ -120,12 +120,12 @@ int main(int argc, char *argv[])
 	Node *x4 = new Node(4, "X4", std::vector<float>{2, 0, 0});
 
 	/*
-                     ( x_3 )
-                    o
-                   /  \
-                 /     \
-       ( x_1 ) o -- o -- o ( x_4 )
-                 ( x_2 )
+					 ( x_3 )
+				    o
+				   /  \
+				 /     \
+		( x_1 ) o -- o -- o ( x_4 )
+	    		 ( x_2 )
 	*/
 	
 	x1->add_edge(x2, DIRECTION::BIDIRECTIONAL);
@@ -143,6 +143,6 @@ int main(int argc, char *argv[])
 	delete x3;
 	delete x4;
 
-    return 0;
+	return 0;
 }
 ```

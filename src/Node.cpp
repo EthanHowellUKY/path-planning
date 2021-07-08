@@ -10,18 +10,16 @@ Edge* Node::get_edge() { return new Edge(); }
 //           CONSTRUCTORS           //
 // -------------------------------- //
 Node::Node(const int &id, const std::string &name, const std::vector<double> &origin)
-    : m_pose(origin.size() + 1, origin.size() + 1),
+    : m_pose(origin.size(), 1),
       m_name{name},
       m_id{id}
 {
     has_parent = false;
 
-    int col = origin.size();
     for (int ii = 0; ii < origin.size(); ii++)
     {
-        m_pose(ii, col) = origin[ii];
+        m_pose(ii, 0) = origin[ii];
     }
-    m_pose(col, col) = 1;
 }
 
 Node::Node(const int &id, const std::string &name, const std::vector<double> &origin, const Matrix &orientation)
