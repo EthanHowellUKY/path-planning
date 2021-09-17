@@ -4,7 +4,7 @@
 
 #include <math.h>
 #include <vector>
-#include "LinearAlgebra/Matrix.h"
+#include "Matrix.h"
 
 class Node;
 
