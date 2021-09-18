@@ -81,7 +81,6 @@ std::deque<Node *> AStar::get_path(Node *start, Node *goal)
                     // Check to see if the cost of this move is better than any previous move.
                     if (est_cost < child->g)
                     {
-                        if (child->has_parent) { child->parent()->reset_cost(); }
                         child->set_parent(current_node);
                         child->g = est_cost;
                         child->f = child->g + this->cost(child, goal);

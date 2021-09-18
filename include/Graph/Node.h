@@ -6,6 +6,11 @@
 #include <vector>
 #include "Matrix.h"
 
+#if WIN32
+#include <float.h>
+#define __FLT_MAX__ FLT_MAX
+#endif
+
 class Node;
 
 enum DIRECTION
